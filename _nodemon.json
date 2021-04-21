@@ -1,0 +1,8 @@
+{
+    "verbose": true,
+    "quiet": false,
+    "server": "./dist/index.html",
+    "watch": ["./"],
+    "ext": "js, scss, html",
+    "exec": "node app.js" 
+}
