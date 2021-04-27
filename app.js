@@ -40,6 +40,7 @@ const port = process.env.PORT || 3002; //
 
 // router.use('/', globalRouter.router1.routes());
 router.use('/users', require('./src/users/users.router'));
+router.use('/category', require('./src/category/category.router'));
 
 app.use(router.middleware());
 

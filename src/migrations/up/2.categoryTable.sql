@@ -1,6 +1,8 @@
 START TRANSACTION;
 CREATE TABLE category (
-    num SERIAL PRIMARY KEY,
-    categoryy VARCHAR NOT NULL
+    id SERIAL PRIMARY KEY,
+    mycategory VARCHAR NOT NULL,
+    users_id INTEGER,
+    FOREIGN KEY (users_id) REFERENCES users (id)
 );
 COMMIT;
