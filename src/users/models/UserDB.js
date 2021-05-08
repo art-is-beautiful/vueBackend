@@ -67,8 +67,8 @@ class UserDB {
     return "Ok";
   }
 
-  static async updateUser(id, fname, lname, username) {
-    const userResponse = await db.query(`UPDATE users SET fname = '${fname}', lname = '${lname}', username = '${username}' WHERE id = ${id} RETURNING *`);
+  static async updateUser(id, fname, lname) {
+    const userResponse = await db.query(`UPDATE users SET fname = '${fname}', lname = '${lname}' WHERE id = ${id} RETURNING *`);
 
     if (!userResponse.rowCount) {
       throw new Error(`User with id: ${id}, does not exist`);
@@ -76,6 +76,16 @@ class UserDB {
 
     return new User(userResponse.rows[0]).getInfo();
   }
+
+  // static async newUserList(ctx) {
+  //   const userListResponse = await db.query('SELECT * FROM "users" INNER JOIN "category" ON users_id');
+
+  //   const users = userListResponse.rows;
+
+  //   ctx.body = {
+  //     users,
+  //   }
+  // }
 
 //   static async userList() {
 //     const userListResponse = await db.query('SELECT * FROM "users"');

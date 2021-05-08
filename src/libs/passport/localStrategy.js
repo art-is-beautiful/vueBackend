@@ -30,7 +30,7 @@ module.exports = new LocalStrategy(opts, async (req, email, mypassword, done) =>
 
     const accessToken = {
         id: user.getId(),
-        expiresIn: new Date().setTime(new Date().getTime() + 200000),
+        expiresIn: new Date().setTime(new Date().getTime() + 1000000),
     };
   
     const refreshToken = {

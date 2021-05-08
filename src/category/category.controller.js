@@ -1,6 +1,8 @@
 const passport = require('koa-passport');
 const jwt = require('jwt-simple');
 
+const db = require('../db/db');
+
 const { CategoryDB } = require('./models/CategoryDB');
 
 class CategoryController {
@@ -32,12 +34,21 @@ class CategoryController {
     //     }
     // }
     static async updateCategoty(ctx) {
-        const { mycategory, users_id } = ctx.request.body;
+        const { mycategory, users_id, phone_number, gender, country } = ctx.request.body;
       
         ctx.status = 200;
-        ctx.body = await CategoryDB.updateCategoty(mycategory, users_id);
+        ctx.body = await CategoryDB.updateCategoty(mycategory, users_id, phone_number, gender, country);
 
     }
+    static async categoryList(ctx) {
+        const catListResponse = await db.query('SELECT * FROM "category"');
+  
+        const categories = catListResponse.rows;
+  
+        ctx.body = {
+            categories,
+        }
+      }
 }
 
 module.exports = { CategoryController };

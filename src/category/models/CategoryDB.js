@@ -33,8 +33,8 @@ class CategoryDB {
 //     return "Ok";
 //   }
 
-  static async updateCategoty(mycategory, users_id) { //id or users_id
-    const userResponse = await db.query(`UPDATE category SET mycategory = '${mycategory}' WHERE users_id = ${users_id} RETURNING *`);
+  static async updateCategoty(mycategory, users_id, phone_number, gender, country) { //id or users_id //phone_number, gender, country
+    const userResponse = await db.query(`UPDATE category SET mycategory = '${mycategory}', phone_number = '${phone_number}', gender = '${gender}', country = '${country}' WHERE users_id = ${users_id} RETURNING *`);
 
     if (!userResponse.rowCount) {
       throw new Error(`User with id: ${users_id}, does not exist`);

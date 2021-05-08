@@ -18,6 +18,7 @@ const router = new Router();
 router.put("/update", CategoryController.updateCategoty);
 router.get("/get-one/:userId", CategoryController.getCategoryById);
 router.post("/create-category", CategoryController.createCategory); 
+// router.get("/users-list", CategoryController.categoryList);
 
 // router.post('/example', UserValidator.example, UsersController.example);
 

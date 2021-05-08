@@ -2,6 +2,8 @@ const passport = require('koa-passport');
 const jwt = require('jwt-simple');
 
 const { UserDB } = require('./models/UserDB');
+const db = require('../db/db');
+
 
 class UsersController {
     static async example(ctx) {
@@ -10,7 +12,7 @@ class UsersController {
         const { body } = ctx.request;
         ctx.body = { body };
     }
-    static async signUser(ctx) {
+    static async signUser(ctx, next) {
         await passport.authenticate('local', (err, user) => {
           if (user) {
             ctx.body = user;
@@ -20,12 +22,20 @@ class UsersController {
               ctx.body = { error: err };
             }
           }
-        })(ctx);
+        })(ctx, next);
     }
     static async profile1(ctx) {
-        ctx.body = {
-          user: ctx.state.user,
-        };
+      // const userEmail = this.window.localStorage.getItem('myemail'); // window.localStorage.getItem('myemail');
+      // const userListResponse = await db.query(`SELECT * FROM "users" INNER JOIN "category" ON users.id = category.users_id WHERE users.email = ${userEmail}`);
+
+      // const users = userListResponse.rows;
+
+      // ctx.body = {
+      //   users,
+      // }
+      ctx.body = {
+        user: ctx.state.user,
+      };
     }
     static async createUser(ctx) {
         const { fname, lname, username, email, mypassword } = ctx.request.body;
@@ -71,6 +81,14 @@ class UsersController {
         ctx.body = myUser.getInfo();
 
     }
+  //   static async getOneUserEmail(ctx) {
+  //     const userEmail = ctx.state.user.email;
+    
+  //     const myUser = await UserDB.getUserByEmail(userEmail);
+
+  //     ctx.status = 200;
+  //     ctx.body = myUser.getInfo();
+  // }
 
     static async deleteUser(ctx) {
         const userId = ctx.request.params.userId;
@@ -83,11 +101,29 @@ class UsersController {
         }
     }
     static async updateUser(ctx) {
-        const {id, fname, lname, username } = ctx.request.body;
+        const {id, fname, lname } = ctx.request.body;
       
         ctx.status = 200;
-        ctx.body = await UserDB.updateUser(id, fname, lname, username);
+        ctx.body = await UserDB.updateUser(id, fname, lname);
 
+    }
+    static async userList(ctx) {
+      const userListResponse = await db.query('SELECT * FROM "users"');
+
+      const users = userListResponse.rows;
+
+      ctx.body = {
+        users,
+      }
+    }
+    static async userListInner(ctx) {
+      const userListResponse = await db.query('SELECT * FROM "users" INNER JOIN "category" ON users.id = category.users_id');
+
+      const users = userListResponse.rows;
+
+      ctx.body = {
+        users,
+      }
     }
 }
 

@@ -9,7 +9,18 @@ class User {
         this._mypassword = dbRes.mypassword;
     }
 
-    getInfo(idFlag = false) {
+    // getInfo() {
+    //     const responseData = {
+    //         fname: this.fname,
+    //         lname: this.lname,
+    //         email: this.email,
+    //         username: this.username,
+    //         id: this.id
+    //     };
+    //     return responseData;
+    // }
+
+    getInfo(idFlag = true) {    //idFlag = false
         const responseData = {
             fname: this.fname,
             lname: this.lname,
