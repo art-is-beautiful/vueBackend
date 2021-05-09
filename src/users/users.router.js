@@ -14,8 +14,12 @@ router.post("/sign-in", UserValidator.signIn, UsersController.signUser);        
 router.delete("/delete/:userId", UsersController.deleteUser);                       // +
 router.put("/update", UsersController.updateUser);                                  // + 
 router.get("/get-one/:userId", UsersController.getOneUser);                         // +
-router.get("/users-list", UsersController.userList);                         
+router.get("/users-list", UsersController.userList);    
+
 router.get("/users-list-inner", UsersController.userListInner); 
+router.get("/users-country/:country", UsersController.searchByCountry);              //search by country
+router.get("/users-role/:role", UsersController.searchByRole);              //search by role
+
 
 // router.get("/users-email", UsersController.getOneUserEmail);    //getOneUserEmail 
 

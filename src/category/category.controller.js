@@ -48,6 +48,17 @@ class CategoryController {
         ctx.body = {
             categories,
         }
+    }
+    static async searchByCountry(ctx) {
+        // const { gender } = ctx.request.body;
+        const country = ctx.request.params.country;
+        const userListResponse = await db.query(`SELECT * FROM "category" WHERE "country" = '${country}' `);
+  
+        const users = userListResponse.rows;
+  
+        ctx.body = {
+          users,
+        }
       }
 }
 

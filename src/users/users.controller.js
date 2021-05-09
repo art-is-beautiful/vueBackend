@@ -125,6 +125,29 @@ class UsersController {
         users,
       }
     }
+    static async searchByCountry(ctx) {
+      // const { gender } = ctx.request.body;
+      const country = ctx.request.params.country;
+      const userListResponse = await db.query(`SELECT * FROM "users" INNER JOIN "category" ON users.id = category.users_id WHERE "country" = '${country}' `);
+
+      const users = userListResponse.rows;
+
+      ctx.body = {
+        users,
+      }
+    }
+    //searchByRole
+    static async searchByRole(ctx) {
+      // const { gender } = ctx.request.body;
+      const role = ctx.request.params.role;
+      const userListResponse = await db.query(`SELECT * FROM "users" INNER JOIN "category" ON users.id = category.users_id WHERE "mycategory" = '${role}' `);
+
+      const users = userListResponse.rows;
+
+      ctx.body = {
+        users,
+      }
+    }
 }
 
 module.exports = { UsersController };
