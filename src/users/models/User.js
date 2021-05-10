@@ -7,6 +7,7 @@ class User {
         this.username = dbRes.username;
         this.email = dbRes.email;
         this._mypassword = dbRes.mypassword;
+        this.photo = dbRes.photo;
     }
 
     // getInfo() {
@@ -25,7 +26,8 @@ class User {
             fname: this.fname,
             lname: this.lname,
             email: this.email,
-            username: this.username
+            username: this.username,
+            photo: this.photo
         };
         if (idFlag) {
             responseData.id = this._id;

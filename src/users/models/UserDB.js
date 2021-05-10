@@ -76,6 +76,12 @@ class UserDB {
 
     return new User(userResponse.rows[0]).getInfo();
   }
+  static async updateUserPhoto(photoUrl, id) {
+    await db.query(`
+      UPDATE "users" SET photo = '${photoUrl}'
+      WHERE id = '${id}'
+    `);
+  }
 
   // static async newUserList(ctx) {
   //   const userListResponse = await db.query('SELECT * FROM "users" INNER JOIN "category" ON users_id');

@@ -15,6 +15,7 @@ router.delete("/delete/:userId", UsersController.deleteUser);                   
 router.put("/update", UsersController.updateUser);                                  // + 
 router.get("/get-one/:userId", UsersController.getOneUser);                         // +
 router.get("/users-list", UsersController.userList);    
+router.put("/photo",  passport.authenticate("jwt", { session: false }), UsersController.updatePhoto);    
 
 router.get("/users-list-inner", UsersController.userListInner); 
 router.get("/users-country/:country", UsersController.searchByCountry);              //search by country
