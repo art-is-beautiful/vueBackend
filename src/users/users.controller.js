@@ -1,5 +1,6 @@
 const passport = require('koa-passport');
 const jwt = require('jwt-simple');
+const crypto = require('crypto');
 
 const { UserDB } = require('./models/UserDB');
 const AWSS3 = require('../utils/uploadS3');
@@ -155,6 +156,18 @@ class UsersController {
   
       await UserDB.updateUserPhoto(photoUrl, ctx.state.user.id);
       ctx.body = { photoUrl };
+    }
+    static async updatePassword(ctx) {
+      const {id, mypassword } = ctx.request.body;
+      const passwordHash = crypto.pbkdf2Sync(mypassword, 'salt', 100000, 64, 'sha256').toString('hex');
+ 
+      const userResponse = await db.query(`UPDATE users SET mypassword = '${passwordHash}' WHERE id = ${id} RETURNING *`);
+      
+      const users = userResponse.rows;
+
+      ctx.body = {
+        users,
+      }
     }
 }
 
