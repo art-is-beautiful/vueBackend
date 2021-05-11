@@ -13,6 +13,15 @@ class UserDB {
 
     return new User(userResponse.rows[0]);
   }
+  static async getUserByUsername(username) {
+    const userResponse = await db.query(`SELECT * FROM "users" WHERE username = '${username}'`);
+
+    if (!userResponse.rowCount) {
+      throw new Error(`User with username: ${username}, does not exist`);
+    }
+
+    return new User(userResponse.rows[0]);
+  }
 
   static async getUserByEmail(email) {
     const userResponse = await db.query(`SELECT * FROM "users" WHERE email = '${email}'`);
@@ -59,6 +68,15 @@ class UserDB {
 
   static async deleteUserById(id) {
     const userResponse = await db.query(`DELETE FROM users WHERE id = ${id}`);
+
+    if (!userResponse.rowCount) {
+      throw new Error(`User with id: ${id}, does not exist`);
+    }
+
+    return "Ok";
+  }
+  static async deleteAllUserById(id) {
+    const userResponse = await db.query(`DELETE FROM users WHERE id = ${id}, DELETE FROM category WHERE user_id =${id}`);
 
     if (!userResponse.rowCount) {
       throw new Error(`User with id: ${id}, does not exist`);

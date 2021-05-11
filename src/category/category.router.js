@@ -17,6 +17,7 @@ const router = new Router();
 
 router.put("/update", CategoryController.updateCategoty);
 router.get("/get-one/:userId", CategoryController.getCategoryById);
+router.delete("/delete-cat/:userId", CategoryController.deleteCategory);                       // +
 router.post("/create-category", CategoryController.createCategory); 
 router.get("/users-country/:country", CategoryController.searchByCountry);              //search by country
 // router.get("/users-list", CategoryController.categoryList);

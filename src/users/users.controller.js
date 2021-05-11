@@ -84,6 +84,22 @@ class UsersController {
         ctx.body = myUser.getInfo();
 
     }
+    static async getOneUsername(ctx) {
+      const username = ctx.request.params.username;
+    
+      // const myUser = await UserDB.getUserByUsername(username);
+
+      // ctx.status = 200;
+      // ctx.body = myUser.getInfo();
+      const userListResponse = await db.query(`SELECT * FROM "users" WHERE username = '${username}'`);
+
+      const users = userListResponse.rows;
+
+      ctx.body = {
+        users,
+      }
+
+  }
   //   static async getOneUserEmail(ctx) {
   //     const userEmail = ctx.state.user.email;
     
@@ -103,6 +119,16 @@ class UsersController {
             deleted: "Ok"
         }
     }
+    static async deleteAllUser(ctx) {
+      const userId = ctx.request.params.userId;
+    
+      await UserDB.deleteAllUserById(userId);
+
+      ctx.status = 200;
+      ctx.body = {
+          deleted: "Ok"
+      }
+  }
     static async updateUser(ctx) {
         const {id, fname, lname } = ctx.request.body;
       

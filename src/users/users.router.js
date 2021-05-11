@@ -12,8 +12,10 @@ router.get("/refresh/token", UsersController.refresh);                          
 router.post("/sign-up", UserValidator.createUser, UsersController.createUser);      // +
 router.post("/sign-in", UserValidator.signIn, UsersController.signUser);            // +
 router.delete("/delete/:userId", passport.authenticate("jwt", { session: false }), UsersController.deleteUser);                       // +
+router.delete("/delete-all/:userId", passport.authenticate("jwt", { session: false }), UsersController.deleteAllUser);                       // +
 router.put("/update", UsersController.updateUser);                                  // + 
 router.get("/get-one/:userId", UsersController.getOneUser);                         // +
+router.get("/get-username/:username", UsersController.getOneUsername);                         // +
 router.get("/users-list", UsersController.userList);    
 router.put("/photo",  passport.authenticate("jwt", { session: false }), UsersController.updatePhoto);    
 

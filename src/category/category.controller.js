@@ -23,16 +23,18 @@ class CategoryController {
 
     }
 
-    // static async deleteCategory(ctx) {
-    //     const userId = ctx.request.params.userId;
-      
-    //     await UserDB.deleteUserById(userId);
+    static async deleteCategory(ctx) {
+        const userId = ctx.request.params.userId;
 
-    //     ctx.status = 200;
-    //     ctx.body = {
-    //         deleted: "Ok"
-    //     }
-    // }
+        const categoryListResponse = await db.query(`DELETE FROM category WHERE user_id = ${userId} `);
+      
+        // await UserDB.deleteUserById(userId);
+
+        ctx.status = 200;
+        ctx.body = {
+            deleted: "Ok"
+        }
+    }
     static async updateCategoty(ctx) {
         const { mycategory, users_id, phone_number, gender, country } = ctx.request.body;
       
