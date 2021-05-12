@@ -9,7 +9,7 @@ class Database {
       host: process.env.ODB_HOST,
       database: process.env.ODB_NAME,
       password: process.env.ODB_PASSWORD,
-      port: process.env.ODB_PORT,
+      port: 5432,
     };
 
     this.pool = new Pool(this.config);

@@ -35,6 +35,9 @@ router.use('/category', require('./src/category/category.router'));
 
 app.use(router.middleware());
 
+app.use((ctx) => {
+  ctx.body = 'It works';
+});
 // app.use(router.routes());
 
 app.listen(port, () => {
