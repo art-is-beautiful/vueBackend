@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
     server: {
       baseUrl: 'http://localhost:3002',
@@ -10,7 +12,7 @@ module.exports = {
     },
     aws: {
       accessKeyId: 'AKIA2GXQ2LUNX5RX46G5',
-      secretAccessKey: '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',
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
       bucketName: 'artem.db2-lecture',
       userPhotoFolder: 'users',
     },
