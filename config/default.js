@@ -6,12 +6,12 @@ module.exports = {
     },
     sendGrid: {
       baseEmail: 'no-reply@fix-me-bruh.com',
-      apiKey: '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',
-      emailValidation: 'd-62e46a1c5a4047f1b676ec1bcee514ac',
-      resetPassword: 'd-fe97a71b6e774530b14b5d5271bdef08',
+      apiKey: process.env.API_KEY,,
+      emailValidation: process.env.EMAIL_VALIDATION,
+      resetPassword: process.env.RESET_PASSWORD,
     },
     aws: {
-      accessKeyId: 'AKIA2GXQ2LUNX5RX46G5',
+      accessKeyId: process.env.SACCESS_KEY_ID,
       secretAccessKey: process.env.SECRET_ACCESS_KEY,
       bucketName: 'artem.db2-lecture',
       userPhotoFolder: 'users',
